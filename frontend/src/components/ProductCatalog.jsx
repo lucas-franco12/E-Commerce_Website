@@ -10,7 +10,7 @@ export default function ProductCatalog() {
 
   return (
     <>
-    <Navbar />
+    <Navbar userType='customer'/>
     <section className="product--catalog">
         <div className="center--text">
           <h2>Product Catalog</h2>

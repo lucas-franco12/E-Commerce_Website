@@ -13,7 +13,7 @@ export default function SellerDashboard({ products }) {
 
   return (
     <>
-      <Navbar />
+      <Navbar userType='customer'/>
     <section className="seller--dashboard">
       <div className="center--text">
         <h2>Welcome to your Dashboard</h2>
