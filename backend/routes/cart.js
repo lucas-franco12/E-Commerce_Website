@@ -1,13 +1,13 @@
 const router = require('express').Router();
 const {verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin} = require('./verifyToken');
-const OrderItem = require('../models/OrderItem');
+const Cart = require('../models/Cart');
 
 //Create cart
-router.post('/', verifyToken, async (req, res) => {
-    const newOrderItem = new OrderItem(req.body);
+router.post('/', async (req, res) => {
+    const newCart = new Cart(req.body);
     try{
-        const savedOrderItem = await newOrderItem.save();
-        res.status(201).json(savedOrderItem);
+        const savedCart = await newCart.save();
+        res.status(201).json(savedCart);
     } catch(err){
         res.status(500).json(err);
     }
@@ -16,8 +16,8 @@ router.post('/', verifyToken, async (req, res) => {
 //Update cart
 router.post('/:id', verifyTokenAndAuthorization, async (req, res) => {
     try{
-        const updatedOrderItem = await OrderItem.findByIdAndUpdate(req.params.id, { $set: req.body }, {new: true});
-        res.status(200).json(updatedOrderItem);
+        const updatedCart = await Cart.findByIdAndUpdate(req.params.id, { $set: req.body }, {new: true});
+        res.status(200).json(updatedCart);
     } catch(err){
         res.status(500).json(err);
     }
@@ -26,7 +26,7 @@ router.post('/:id', verifyTokenAndAuthorization, async (req, res) => {
 //Delete
 router.delete('/:id', verifyTokenAndAuthorization, async (req, res) => {
     try{
-        await orderItem.findByIdAndDelete(req.params.id);
+        await Cart.findByIdAndDelete(req.params.id);
         res.status(200).json("The cart is empty...");
     } catch(err){
         res.status(500).json(err);
@@ -36,8 +36,8 @@ router.delete('/:id', verifyTokenAndAuthorization, async (req, res) => {
 //Get Cart
 router.get('/find/:userID', verifyTokenAndAuthorization, async (req, res) => {
     try{
-        const orderItem = await OrderItem.findOne({userID: req.params.userID});
-        res.status(200).json(orderItem);
+        const Cart = await Cart.findOne({userID: req.params.userID});
+        res.status(200).json(Cart);
     } catch(err){
         res.status(500).json(err);
     }
@@ -46,8 +46,8 @@ router.get('/find/:userID', verifyTokenAndAuthorization, async (req, res) => {
 //Get All carts
 router.get('/', verifyTokenAndAdmin, async (req, res) => {
     try{
-        const orderItems = await OrderItem.find();
-        res.status(200).json(orderItems);
+        const Carts = await Cart.find();
+        res.status(200).json(Carts);
     } catch(err){
         res.status(500).json(err);
     }

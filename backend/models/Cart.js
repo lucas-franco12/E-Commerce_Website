@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const CartSchema = new mongoose.Schema(
     {
-        userID: { type: String, required: true, maxlength: 9},
+        userID: { type: String, required: true},
         products: [
             {
                 SKU: { type: String, required: true, maxlength: 8},

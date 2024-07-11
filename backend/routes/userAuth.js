@@ -35,7 +35,7 @@ router.post("/login", async (req, res) => {
         if(firstPassword!==req.body.password){
             return res.status(401).json("Bad credentials");
         }
-        const accessToken = jwt.sign({id:user._id, isAdmin:user.isAdmin, isSeller: user.isSeller}, process.env.JWT_SECRET_KEY, {expiresIn: "1d"});
+        const accessToken = jwt.sign({id:user._id}, process.env.JWT_SECRET_KEY, {expiresIn: "20d"});
         const {password, ...others} = user._doc;
         
         res.status(200).json({...others, accessToken});

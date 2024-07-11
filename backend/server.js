@@ -16,17 +16,19 @@ app.use(morgan('tiny'));
 //Routes
 const productsRoute = require('./routes/products');
 const userRoute = require('./routes/users');
-const orderItemRoute = require('./routes/orderItem');
+const cartRoute = require('./routes/cart');
 const orderRoute = require('./routes/order');
 const categoriesRoute = require('./routes/categories');
-const authRoute = require('./routes/auth');
+const authRoute = require('./routes/userAuth');
+const sellerAuthRoute = require('./routes/sellerAuth');
 
 app.use('/api/products', productsRoute)
-app.use('/api/orderItems', orderItemRoute)
+app.use('/api/cart', cartRoute)
 app.use('/api/orders', orderRoute)
 app.use('/api/categories', categoriesRoute)
 app.use('/api/users', userRoute)
-app.use('/api/auth', authRoute)
+app.use('/api/userAuth', authRoute)
+app.use('/api/sellerAuth', sellerAuthRoute)
 
 // Connect to the database
 mongoose.connect(process.env.DB_URL)
