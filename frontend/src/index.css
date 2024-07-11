@@ -97,6 +97,83 @@ nav i {
   transform: scale(1.1);
 }
 
+/* Login and Signup */
+.login--container, .signup--container{
+  width: 600px;
+  height: 600px;
+  text-align: center;
+  background-color: var(--secondary-bg-color); 
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.form-box{
+  width: 90%;
+  max-width: 450px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 50px 60px 70px;
+  text-align: center;
+}
+
+.form-box h3{
+  font-size: 30px;
+  margin-bottom: 60px;
+  color: var(--text-color) ;
+  position: relative;
+}
+
+.login-input-group,
+.signup-input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-field{
+  background: #eaeaea;
+  margin: 15px 0;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+}
+
+.login-input, .signup-input {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  padding: 18px 15px;
+}
+
+.input-field:hover {
+  box-shadow: 0 0 20px var(--accent-color1);
+}
+
+.input-field i {
+  margin-left: 15px;
+  color: #999;
+}
+
+.form-box .nav-link {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-color);
+  margin:10px auto;
+  width: 300px;
+}
+
+.form-box .nav-link:hover {
+  color:var(--accent-color1);
+}
+
 /* Product Catalog and Seller Dashboard*/
 
 .product--catalog, .seller--dashboard {

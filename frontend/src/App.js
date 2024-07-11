@@ -1,8 +1,10 @@
 // import React, { useState} from 'react';
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './index.css';
 import Home from './components/Home';
-import { Route, Routes } from 'react-router-dom';
+import Login from './components/Login';
+import Signup from './components/Signup';
 import ProductCatalog from './components/ProductCatalog';
 import ProductDetail from './components/ProductDetail';
 import Cart from './components/Cart';
@@ -29,6 +31,8 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login/:userType" element={<Login />} />
+          <Route path="/signup/:userType" element={<Signup />} />
           <Route path="/products" element={<ProductCatalog />} />
           <Route path="/products/:id" element={<ProductDetail products={products} />} />
           {/* <Route path="/add-product" element={<AddProduct addProduct={addProduct}/>} /> */}
