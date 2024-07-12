@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path'); 
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
@@ -12,6 +13,7 @@ dotenv.config();
 //Middleware
 app.use(bodyParser.json());
 app.use(morgan('tiny'));
+app.use(express.static(path.join(__dirname, '../build')));
 
 //Routes
 const productsRoute = require('./routes/products');
@@ -41,4 +43,8 @@ app.get('/', (req, res) => {
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Server is running on http://localhost:${process.env.PORT || 5000}`);
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
