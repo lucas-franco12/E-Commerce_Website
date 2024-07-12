@@ -1,10 +1,4 @@
 {
-<<<<<<< HEAD
-  "dependencies": {
-    "crypto-js": "^4.2.0",
-    "jsonwebtoken": "^9.0.2",
-    "morgan": "^1.10.0"
-=======
   "name": "ecommerce-frontend",
   "version": "0.1.0",
   "private": true,
@@ -52,6 +46,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
->>>>>>> 7dc3a9f (added axios to components)
   }
 }
