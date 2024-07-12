@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from './CartContext';
+import api from '../api';
 
 export default function Checkout() {
   const [formData, setFormData] = useState({
@@ -13,7 +14,7 @@ export default function Checkout() {
   });
 
   const [orderPlaced, setOrderPlaced] = useState(false);
-  const { clearCart } = useCart();
+  const { cart, clearCart } = useCart();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,12 +24,20 @@ export default function Checkout() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setOrderPlaced(true);
-    clearCart();
+    try {
+      const order = {
+        ...formData,
+        items: cart
+      };
+      await api.post('/orders', order);
+      clearCart();
+      setOrderPlaced(true);
+    } catch (err) {
+      console.error('Error placing order', err);
+    }
   };
-
   return (
     <>
     <div className="banner fixed-top">

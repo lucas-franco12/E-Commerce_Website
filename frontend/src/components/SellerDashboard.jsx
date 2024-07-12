@@ -1,19 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import Navbar from './Navbar';
+import api from '../api';
 
-export default function SellerDashboard({ products }) {
+export default function SellerDashboard() {
+  const [products, setProducts] = useState([]);
 
-    console.log(products)
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const response = await api.get('/products');
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    }
+
+    fetchProducts();
+  }, []);
     
-  const productList = products.map((product, index) => (
+    
+  const productList = products && products.map((product, index) => (
     <ProductCard key={index} product={product} />
   ));
 
   return (
     <>
-      <Navbar userType='customer'/>
+    <Navbar userType='seller'/>
     <section className="seller--dashboard">
       <div className="center--text">
         <h2>Welcome to your Dashboard</h2>

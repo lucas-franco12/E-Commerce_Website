@@ -1,9 +1,29 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
-import orders from '../orders';
+import api from '../api';
+
 
 export default function OrderPage() {
+  const [orders, setOrders] = useState([]);
+  const navigate = useNavigate()
+
+  const viewProduct = (productId) => {
+    navigate(`/product/${productId}`);
+  }
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await api.get('orders');
+        setOrders(response.data);
+      } catch (err) {
+        console.error('Error fetching orders', err);
+      }
+    }
+
+    fetchOrders();
+  }, []);
 
   return (
     <>
@@ -32,7 +52,7 @@ export default function OrderPage() {
                   <td>{order.date}</td>
                   <td>{order.productName}</td>
                   <td>
-                    <button className="btn form--btn2" onClick={() => alert('Cannot view product')}>View</button>
+                    <button className="btn form--btn2" onClick={viewProduct}>View</button>
                   </td>
                 </tr>
               ))}

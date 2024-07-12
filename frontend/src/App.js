@@ -1,5 +1,5 @@
 // import React, { useState} from 'react';
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './index.css';
 import Home from './components/Home';
@@ -11,39 +11,30 @@ import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import SellerDashboard from './components/SellerDashboard';
 import OrderPage from './components/OrderPage';
-// import AddProduct from './components/AddProduct';
-import products from './products';
-import orders from './orders';
+import AddProduct from './components/AddProduct';
 import { CartProvider } from './components/CartContext';
 
 function App() {
-
-  // const [products, setProducts] = useState([]);
-  
-  // const addProduct = (product) => {
-  //   const updatedProducts = [...products, product];
-  //   setProducts(updatedProducts);
-  //   localStorage.setItem('products', JSON.stringify(updatedProducts));
-  // };
+  const [userId, setUserId] = useState(null);
 
   return (
     <CartProvider>
       <div className="App">
-        <Routes>
+      <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login/:userType" element={<Login />} />
-          <Route path="/signup/:userType" element={<Signup />} />
-          <Route path="/products" element={<ProductCatalog />} />
-          <Route path="/products/:id" element={<ProductDetail products={products} />} />
-          {/* <Route path="/add-product" element={<AddProduct addProduct={addProduct}/>} /> */}
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/dashboard" element={<SellerDashboard products={products} />} />
-          <Route path="/orders" element={<OrderPage order={orders}/>} />
+          <Route path="/login/:userType" element={<Login setUserId={setUserId} />} />
+          <Route path="/signup/:userType" element={<Signup setUserId={setUserId} />} />
+          <Route path="/products" element={<ProductCatalog userId={userId} />} />
+          <Route path="/products/:id" element={<ProductDetail userId={userId} />} />
+          <Route path="/add-product" element={<AddProduct userId={userId} />} />
+          <Route path="/cart" element={<Cart userId={userId} />} />
+          <Route path="/checkout" element={<Checkout userId={userId} />} />
+          <Route path="/dashboard" element={<SellerDashboard userId={userId} />} />
+          <Route path="/orders" element={<OrderPage userId={userId} />} />
         </Routes>
       </div>
     </CartProvider>
-  )
-  }
+  );
+}
 
 export default App;

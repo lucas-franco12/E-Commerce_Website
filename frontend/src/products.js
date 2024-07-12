@@ -1,5 +1,8 @@
 import { nanoid } from 'nanoid';
 
+// temportary array for testing
+
+
 const products = [
     {
       id: nanoid(),

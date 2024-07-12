@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
+// import api from '../api';
 
-export default function Signup() {
+export default function Signup({ setUserId }) {
   const { userType } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
+    username:'',
     email: '',
     password: ''
   });
@@ -18,12 +20,17 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // add to database here
-
-    if (userType === 'customer') {
-      navigate('/products');
-    } else if (userType === 'seller') {
-      navigate('/seller-dashboard');
+    try {
+      // const response = await api.post(`/signup/${userType}`, formData);
+      // setUserId(response.data.userId);
+      setUserId(2);
+      if (userType === 'customer') {
+        navigate('/products');
+      } else if (userType === 'seller') {
+        navigate('/dashboard');
+      }
+    } catch (err) {
+      console.error('Signup error', err);
     }
   };
 
@@ -33,6 +40,19 @@ export default function Signup() {
         <h3 id="title">Sign Up</h3>
         <form onSubmit={handleSubmit}>
           <div id="signup-card" className="signup-input-group">
+            <div className="input-field">
+              <i className="bi bi-person-fill"></i>
+              <input
+                className="signup-input"
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Username"
+                value={formData.username}
+                onChange={handleChange}
+                required
+              />
+            </div>
             <div className="input-field">
               <i className="bi bi-envelope-fill"></i>
               <input

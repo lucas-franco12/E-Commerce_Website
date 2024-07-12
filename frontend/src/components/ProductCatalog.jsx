@@ -1,12 +1,29 @@
-import React from 'react';
-import products from '../products';
+import React, { useEffect, useState } from 'react';
 import ProductCard from './ProductCard';
-import Navbar from './Navbar'
+import Navbar from './Navbar';
+import api from '../api';
 
 export default function ProductCatalog() {
-  const productList = products.map((product, index) => (
+  
+  const { products, setProducts } = useState([]);
+
+  useEffect(() => {
+    async function fetchProducts(){
+      try {
+        const response = await api.get('/products');
+        setProducts(response.data);
+      } catch(err) {
+        console.error('Could not fetch products', err);
+      }
+    }
+    fetchProducts();
+  }, [setProducts])
+
+  
+  const productList = products && products.map((product, index) => (
     <ProductCard key={index} product={product} />
   ));
+  
 
   return (
     <>

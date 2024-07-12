@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
+// import api from '../api';
 
 
-
-export default function Login() {
+export default function Login({ setUserId }) {
     const { userType } = useParams(); 
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
+        username: '',
         email: '',
         password: ''
     });
@@ -18,14 +19,20 @@ export default function Login() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Add authentication here
 
-        if (userType === 'customer') {
-          navigate('/products');
-        } else if (userType === 'seller') {
-          navigate('/seller-dashboard');
+        try {
+            // const response = await api.post(`/login/${userType}`, formData);
+            // setUserId(response.data.userId);
+            setUserId(1);
+            if (userType === 'customer') {
+              navigate('/products');
+            } else if (userType === 'seller') {
+              navigate('/dashboard');
+            }
+          } catch (err) {
+            console.error('Login error', err);
         }
     };
 
@@ -37,30 +44,43 @@ export default function Login() {
                 <form onSubmit={handleSubmit}>
                     <div id="login-card" className="login-input-group">
                         <div className="input-field">
-                        <i className="bi bi-envelope-fill"></i>
-                        <input
-                            className="login-input"
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="Email"
-                            value={formData.email}
-                            onChange={handleChange}  
-                            required
-                        />
+                            <i className="bi bi-person-fill"></i>
+                            <input
+                                className="signup-input"
+                                type="text"
+                                id="username"
+                                name="username"
+                                placeholder="Username"
+                                value={formData.username}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
                         <div className="input-field">
-                        <i className="bi bi-lock-fill"></i>
-                        <input
-                            className="login-input"
-                            type="password"
-                            id="password"
-                            name="password"
-                            placeholder="Password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
-                        />
+                            <i className="bi bi-envelope-fill"></i>
+                            <input
+                                className="login-input"
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Email"
+                                value={formData.email}
+                                onChange={handleChange}  
+                                required
+                            />
+                        </div>
+                        <div className="input-field">
+                            <i className="bi bi-lock-fill"></i>
+                            <input
+                                className="login-input"
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
                         <button
                         id="login-button"
@@ -72,8 +92,8 @@ export default function Login() {
                     </div>
                 </form>
 
-                <Link className="nav-link main-page--link" to="/">Back to Main Page</Link>
-                <Link className="nav-link main-page--link" to={`/signup/${userType}`}>No account? Sign up.</Link>
+                <Link className="nav-link" to="/">Back to Main Page</Link>
+                <Link className="nav-link" to={`/signup/${userType}`}>No account? Sign up.</Link>
 
             </div>
         </div>

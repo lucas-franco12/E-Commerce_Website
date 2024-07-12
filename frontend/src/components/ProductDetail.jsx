@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useCart } from './CartContext';
+import api from '../api';
 
 
-export default function ProductDetail({ products }) {
+export default function ProductDetail() {
+    const [ product, setProduct ] = useState({})
     const { addToCart } = useCart();
     const navigate = useNavigate();
-
-
     const { id } = useParams();
-    const product = products.find((prod) => prod.id.toString() === id.toString());
+
+    useEffect(() => {
+        async function fetchProduct() {
+            try {
+                const response = await api.get(`/products/${id}`);
+                setProduct(response.data);
+            } catch (err) {
+                console.error('Error fetching product', err);
+            }
+        }
+        fetchProduct();
+    }, [id]);
 
     if (!product) {
         return <div>Product not found!</div>;

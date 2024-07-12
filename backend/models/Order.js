@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+// can we create a 'view' for the orders page?
+
 const OrderSchema = new mongoose.Schema(
     {
         userID: { type: String, required: true},

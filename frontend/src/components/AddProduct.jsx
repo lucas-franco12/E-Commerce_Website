@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import {Link } from 'react-router-dom';
+import  {Link } from 'react-router-dom';
+import api from '../api';
 
-export default function AddProduct({ addProduct }) {
+export default function AddProduct() {
   const [product, setProduct] = useState({
     name: '',
     desc: '',
@@ -19,10 +20,14 @@ export default function AddProduct({ addProduct }) {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addProduct(product);
-    setSubmitted(true);
+    try {
+      await api.post('/products', product); 
+      setSubmitted(true);
+    } catch (err) {
+      console.error('Error adding product:', err);
+    }
   };
 
   return (
