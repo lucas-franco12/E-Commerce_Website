@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Navbar({userType}) {
+function Navbar({userType, userId}) {
   return (
     <nav className="navbar navbar-expand-md fixed-top navbar-dark">
       <div className="container-fluid">
@@ -14,14 +14,14 @@ function Navbar({userType}) {
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           {userType === 'customer' ?
             <div className="navbar-nav ms-auto">
-                <Link className="nav-link" to="/products">View Catalog</Link>
-                <Link className="nav-link" to="/cart">My Cart</Link>
-                <Link className="nav-link" to="/orders">View Orders</Link>
+                <Link className="nav-link" to={`/products?userId=${userId}`}>View Catalog</Link>
+              <Link className="nav-link" to={`/cart?userId=${userId}`}>My Cart</Link>
+              <Link className="nav-link" to={`/orders?userId=${userId}`}>View Orders</Link>
             </div> 
             : 
             <div className="navbar-nav ms-auto">
-                <Link className="nav-link" to="/dashboard">My Dashboard</Link>
-                <Link className="nav-link" to="/orders">View Orders</Link>
+                <Link className="nav-link" to={`/dashboard?userId=${userId}`}>My Dashboard</Link>
+              <Link className="nav-link" to={`/orders?userId=${userId}`}>View Orders</Link>
             </div>
           }
         </div>

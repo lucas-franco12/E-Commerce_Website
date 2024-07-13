@@ -1,24 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import Navbar from './Navbar';
 import api from '../api';
 
 export default function SellerDashboard() {
   const [products, setProducts] = useState([]);
+  const location = useLocation();
+
+  const searchParams = new URLSearchParams(location.search);
+  const userId = searchParams.get('userId');
 
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await api.get('/products');
+        const response = await api.get(`/products?sellerId=${userId}`); // Fetch only seller's products
         setProducts(response.data);
-      } catch (error) {
-        console.error('Error fetching products:', error);
+      } catch (err) {
+        console.error('Error fetching products:', err);
       }
     }
 
-    fetchProducts();
-  }, []);
+    if (userId) {
+      fetchProducts();
+    }
+  }, [userId]);
+
     
     
   const productList = products && products.map((product, index) => (
@@ -27,7 +34,7 @@ export default function SellerDashboard() {
 
   return (
     <>
-    <Navbar userType='seller'/>
+    <Navbar userType='seller' userId={userId}/>
     <section className="seller--dashboard">
       <div className="center--text">
         <h2>Welcome to your Dashboard</h2>
@@ -37,7 +44,7 @@ export default function SellerDashboard() {
             {productList}
             <div className="add-product--card">
               <h5>Add Product</h5>
-              <Link to="/add-product">
+              <Link to={`/add-product?userId=${userId}`}>
                 <i className="bi bi-plus-circle"></i>
               </Link>
             </div> 
@@ -46,7 +53,7 @@ export default function SellerDashboard() {
         (<div className="empty--list">
           <h2>No products listed yet!</h2>
           <h4>Let's get started</h4>
-          <Link className="form--btn" to="/add-product">
+          <Link className="form--btn" to={`/add-product?userId=${userId}`}>
             Add Product
           </Link>
         </div>

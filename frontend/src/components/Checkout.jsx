@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useCart } from './CartContext';
 import api from '../api';
 
 export default function Checkout() {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const userId = searchParams.get('userId');
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -29,7 +33,8 @@ export default function Checkout() {
     try {
       const order = {
         ...formData,
-        items: cart
+        items: cart,
+        userId: userId
       };
       await api.post('/orders', order);
       clearCart();
@@ -38,6 +43,7 @@ export default function Checkout() {
       console.error('Error placing order', err);
     }
   };
+
   return (
     <>
     <div className="banner fixed-top">
@@ -48,8 +54,8 @@ export default function Checkout() {
         <div className="order--placed">
           <h1>Order has been placed!</h1>
           <i className="bi bi-check-circle"></i>
-          <Link className="btn form--btn" to="/products">Return to Dashboard</Link>
-          <Link className="btn form--btn2" to="/orders">View your Orders</Link>
+          <Link className="btn form--btn" to={`/products?userId=${userId}`}>Return to Products</Link>
+          <Link className="btn form--btn2" to={`/orders?userId=${userId}`}>View your Orders</Link>
         </div>
       ) : (
         <div className="form-container">

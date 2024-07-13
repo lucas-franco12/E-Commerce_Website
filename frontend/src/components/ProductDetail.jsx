@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useCart } from './CartContext';
 import api from '../api';
 
-
 export default function ProductDetail() {
-    const [ product, setProduct ] = useState({})
+    const [product, setProduct] = useState({});
     const { addToCart } = useCart();
     const navigate = useNavigate();
     const { id } = useParams();
+    const location = useLocation();
+
+    const searchParams = new URLSearchParams(location.search);
+    const userId = searchParams.get('userId');
 
     useEffect(() => {
         async function fetchProduct() {
             try {
-                const response = await api.get(`/products/${id}`);
+                const response = await api.get(`/products/${id}`); // get specific product
                 setProduct(response.data);
             } catch (err) {
                 console.error('Error fetching product', err);
@@ -22,14 +25,15 @@ export default function ProductDetail() {
         fetchProduct();
     }, [id]);
 
-    if (!product) {
+    if (!product || Object.keys(product).length === 0) {
         return <div>Product not found!</div>;
     }
 
     const handleAddToCart = () => {
         addToCart(product);
-        navigate('/cart');
+        navigate(`/cart?userId=${userId}`);
     };
+
 
     return (
         <div className='product-detail--container'>

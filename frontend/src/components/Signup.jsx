@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-// import api from '../api';
+import api from '../api';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase';
 
 export default function Signup({ setUserId }) {
   const { userType } = useParams();
@@ -21,16 +23,21 @@ export default function Signup({ setUserId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // const response = await api.post(`/signup/${userType}`, formData);
-      // setUserId(response.data.userId);
-      setUserId(2);
+      const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+      const firebaseUserId = userCredential.user.uid;
+
+      const response = await api.post(`/signup/${userType}`, { ...formData, firebaseUserId });
+      const userId = response.data.userId;
+      setUserId(userId);
+
       if (userType === 'customer') {
-        navigate('/products');
+        navigate(`/products?userId=${userId}`);
       } else if (userType === 'seller') {
-        navigate('/dashboard');
+        navigate(`/dashboard?userId=${userId}`);
       }
     } catch (err) {
       console.error('Signup error', err);
+      alert('An error occurred. Please try again.');
     }
   };
 

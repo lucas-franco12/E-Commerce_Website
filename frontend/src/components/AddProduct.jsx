@@ -23,7 +23,7 @@ export default function AddProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post('/products', product); 
+      await api.post('/products', product); // change to add-product/${id}
       setSubmitted(true);
     } catch (err) {
       console.error('Error adding product:', err);

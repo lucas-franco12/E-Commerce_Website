@@ -1,4 +1,3 @@
-// import React, { useState} from 'react';
 import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './index.css';
@@ -18,19 +17,19 @@ function App() {
   const [userId, setUserId] = useState(null);
 
   return (
-    <CartProvider>
+    <CartProvider userId={userId}>
       <div className="App">
-      <Routes>
+        <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login/:userType" element={<Login setUserId={setUserId} />} />
           <Route path="/signup/:userType" element={<Signup setUserId={setUserId} />} />
-          <Route path="/products" element={<ProductCatalog userId={userId} />} />
-          <Route path="/products/:id" element={<ProductDetail userId={userId} />} />
-          <Route path="/add-product" element={<AddProduct userId={userId} />} />
-          <Route path="/cart" element={<Cart userId={userId} />} />
-          <Route path="/checkout" element={<Checkout userId={userId} />} />
-          <Route path="/dashboard" element={<SellerDashboard userId={userId} />} />
-          <Route path="/orders" element={<OrderPage userId={userId} />} />
+          <Route path="/products" element={<ProductCatalog />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/add-product" element={<AddProduct />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/dashboard" element={<SellerDashboard />} />
+          <Route path="/orders" element={<OrderPage />} />
         </Routes>
       </div>
     </CartProvider>

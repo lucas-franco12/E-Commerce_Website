@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-export default function ProductCard({product, index}){
+export default function ProductCard({product, index, userId}){
     
     return(
         <div key={index}>
-          <Link to={`/products/${product.id}`} className="product--card--link"> 
+          <Link to={`/products/${product.id}?userId=${userId}`} className="product--card--link"> 
             <div className="product--card">
               <img src={product.src} alt={`Product ${index + 1}`} />
               <div className="main-row">

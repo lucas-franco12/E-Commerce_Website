@@ -3,14 +3,6 @@ import { Link } from 'react-router-dom'
 
 export default function Home(){
 
-    // const { userType, setUserType } = useState(null);
-
-    // const handleUserType = (type) => {
-    //     setUserType(type);
-    // };
-
-    // onClick={() => handleUserType('customer')
-
     return(
         <div className='home--container'>
             <h1>Welcome to Our E-commerce Platform</h1>

@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import Navbar from './Navbar';
+import { useNavigate, useLocation } from 'react-router-dom';
 import api from '../api';
-
 
 export default function OrderPage() {
   const [orders, setOrders] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const userId = queryParams.get('userId');
 
   const viewProduct = (productId) => {
-    navigate(`/product/${productId}`);
+    navigate(`/product/${productId}?userId=${userId}`);
   }
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await api.get('orders');
+        const response = await api.get(`/orders?userId=${userId}`);
         setOrders(response.data);
       } catch (err) {
         console.error('Error fetching orders', err);
@@ -23,17 +24,15 @@ export default function OrderPage() {
     }
 
     fetchOrders();
-  }, []);
+  }, [userId]);
 
   return (
     <>
-      <Navbar />
       <div className="orders">
         <h1>Your Orders</h1>
         {orders.length === 0 ? (
           <div>
             <p>You have no orders</p>
-            <Link className='btn form--btn' to="/products">View Catalog</Link>
           </div>
         ) : (
           <table className="table">
