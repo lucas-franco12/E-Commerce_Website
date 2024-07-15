@@ -23,7 +23,10 @@ export default function Signup({ setUserId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log('Attempting to create user with email:', formData.email);
       const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+      console.log('User created successfully:', userCredential);
+      
       const firebaseUserId = userCredential.user.uid;
 
       const response = await api.post(`/signup/${userType}`, { ...formData, firebaseUserId });

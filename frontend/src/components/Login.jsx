@@ -1,38 +1,43 @@
 import React, { useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-// import api from '../api';
-
+import api from '../api';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 export default function Login({ setUserId }) {
-    const { userType } = useParams(); 
+    const { userType } = useParams();
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        username: '',
         email: '',
         password: ''
     });
 
     const handleChange = (e) => {
         setFormData({
-        ...formData,
-        [e.target.name]: e.target.value
+            ...formData,
+            [e.target.name]: e.target.value
         });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const auth = getAuth();
 
         try {
-            // const response = await api.post(`/login/${userType}`, formData);
-            // setUserId(response.data.userId);
-            setUserId(1);
+            const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
+            const firebaseUserId = userCredential.user.uid;
+
+            const response = await api.post(`/login/${userType}`, { firebaseUserId });
+            const userId = response.data.userId;
+            setUserId(userId);
+
             if (userType === 'customer') {
-              navigate('/products');
+                navigate(`/products?userId=${userId}`);
             } else if (userType === 'seller') {
-              navigate('/dashboard');
+                navigate(`/dashboard?userId=${userId}`);
             }
-          } catch (err) {
+        } catch (err) {
             console.error('Login error', err);
+            alert('An error occurred. Please try again.');
         }
     };
 

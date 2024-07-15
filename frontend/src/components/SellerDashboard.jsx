@@ -14,7 +14,7 @@ export default function SellerDashboard() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await api.get(`/products?sellerId=${userId}`); // Fetch only seller's products
+        const response = await api.get(`/products/seller?sellerId=${userId}`); // Fetch only seller's products
         setProducts(response.data);
       } catch (err) {
         console.error('Error fetching products:', err);

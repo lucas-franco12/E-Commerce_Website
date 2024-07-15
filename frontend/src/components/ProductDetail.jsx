@@ -16,7 +16,7 @@ export default function ProductDetail() {
     useEffect(() => {
         async function fetchProduct() {
             try {
-                const response = await api.get(`/products/${id}`); // get specific product
+                const response = await api.get(`/products/${id}`);
                 setProduct(response.data);
             } catch (err) {
                 console.error('Error fetching product', err);
@@ -33,7 +33,6 @@ export default function ProductDetail() {
         addToCart(product);
         navigate(`/cart?userId=${userId}`);
     };
-
 
     return (
         <div className='product-detail--container'>
