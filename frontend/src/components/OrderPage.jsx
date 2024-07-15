@@ -27,13 +27,10 @@ export default function OrderPage() {
   }, [userId]);
 
   return (
-    <>
       <div className="orders">
         <h1>Your Orders</h1>
         {orders.length === 0 ? (
-          <div>
-            <p>You have no orders</p>
-          </div>
+            <p className="empty--message">You have no orders</p>
         ) : (
           <table className="table">
             <thead>
@@ -56,9 +53,8 @@ export default function OrderPage() {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table> 
         )}
       </div>
-    </>
   );
 }

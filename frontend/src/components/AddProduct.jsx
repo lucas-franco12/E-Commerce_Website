@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import  {Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import api from '../api';
 
 export default function AddProduct() {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const userId = queryParams.get('userId');
+
   const [product, setProduct] = useState({
     name: '',
     desc: '',
     price: '',
-    src: '',
-    href: ''
+    src: ''
   });
   const [submitted, setSubmitted] = useState(false);
 
@@ -23,7 +26,7 @@ export default function AddProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post('/products', product); // change to add-product/${id}
+      await api.post('/products', { ...product, userId });
       setSubmitted(true);
     } catch (err) {
       console.error('Error adding product:', err);
@@ -36,7 +39,7 @@ export default function AddProduct() {
         <div className="submitted--product">
           <h1>Product has been added!</h1>
           <i className="bi bi-check-circle"></i>
-          <Link className="btn form--btn" to="/dashboard">Return to Dashboard</Link>
+          <Link className="btn form--btn" to={`/dashboard?userId=${userId}`}>Return to Dashboard</Link>
         </div>
       ) : (
         <div className="form-container">

@@ -33,8 +33,11 @@ export function CartProvider({ children, userId }) {
 
   const addToCart = async (product) => {
     try {
-      const response = await api.post(`/cart?userId=${userId}`, product);
-      setCart(response.data); // Assuming the backend returns the updated cart
+      const response = await api.post('/cart', {
+        userId,
+        productId: product._id
+      });
+      setCart(response.data);
     } catch (err) {
       console.error('Error adding to cart', err);
     }
@@ -43,7 +46,7 @@ export function CartProvider({ children, userId }) {
   const removeFromCart = async (productId) => {
     try {
       await api.delete(`/cart/${productId}?userId=${userId}`);
-      setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
+      setCart((prevCart) => prevCart.filter((item) => item.product._id !== productId));
     } catch (err) {
       console.error('Error removing cart item', err);
     }
