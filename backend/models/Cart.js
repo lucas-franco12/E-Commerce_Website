@@ -1,17 +1,19 @@
 const mongoose = require('mongoose');
-//this was order relation
 
 const CartSchema = new mongoose.Schema(
     {
+<<<<<<< Updated upstream
         userId: { type: String, required: true},
+=======
+        userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+>>>>>>> Stashed changes
         products: [
             {
-                SKU: { type: String, required: true, maxlength: 8},
-                quantity: { type: Number, required: true, default: 1},
+                product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true }
             }
         ]
     },
-    {timestamps: true}
+    { timestamps: true }
 );
 
 module.exports = mongoose.model('Cart', CartSchema);
