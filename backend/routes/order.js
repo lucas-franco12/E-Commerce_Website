@@ -1,9 +1,10 @@
 const router = require('express').Router();
-const {verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin} = require('./verifyToken');
 const Order = require('../models/Order');
 
+//CHECK IF UPDATE, DELETE, AND GET USERS ORDERS WORK
+
 //Create order
-router.post('/', verifyToken, async (req, res) => {
+router.post('/', async (req, res) => {
     const newOrder = new Order(req.body);
     try{
         const savedOrder = await newOrder.save();
@@ -14,7 +15,7 @@ router.post('/', verifyToken, async (req, res) => {
 });
 
 //Update order
-router.post('/:id', verifyTokenAndAdmin, async (req, res) => {
+router.post('/:id', async (req, res) => {
     try{
         const updatedOrder = await Order.findByIdAndUpdate(req.params.id, { $set: req.body }, {new: true});
         res.status(200).json(updatedOrder);
@@ -24,7 +25,7 @@ router.post('/:id', verifyTokenAndAdmin, async (req, res) => {
 });
 
 //Delete
-router.delete('/:id', verifyTokenAndAdmin, async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try{
         await Order.findByIdAndDelete(req.params.id);
         res.status(200).json("Order has been deleted...");
@@ -33,24 +34,25 @@ router.delete('/:id', verifyTokenAndAdmin, async (req, res) => {
     }
 });
 
-//Get user orders
-router.get('/find/:userID', verifyTokenAndAuthorization, async (req, res) => {
-    try{
-        const orders = await Order.find({userID: req.params.userID});
+// Get user orders
+router.get('/', async (req, res) => {
+    const userId = req.query.userId;
+    try {
+        const orders = await Order.find({ userId });
         res.status(200).json(orders);
-    } catch(err){
+    } catch (err) {
         res.status(500).json(err);
     }
 });
 
-//Get All carts
-router.get('/', verifyTokenAndAdmin, async (req, res) => {
-    try{
-        const orders = await Order.find();
-        res.status(200).json(orders);
-    } catch(err){
-        res.status(500).json(err);
-    }
-});
+// //Get All carts (admin function)
+// router.get('/', async (req, res) => {
+//     try{
+//         const orders = await Order.find();
+//         res.status(200).json(orders);
+//     } catch(err){
+//         res.status(500).json(err);
+//     }
+// });
 
 module.exports = router;
