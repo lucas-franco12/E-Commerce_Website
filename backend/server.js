@@ -16,21 +16,19 @@ app.use(morgan('tiny'));
 app.use(express.static(path.join(__dirname, '../build')));
 
 //Routes
-const productsRoute = require('./routes/products');
-const userRoute = require('./routes/users');
 const cartRoute = require('./routes/cart');
+const sellerRoute = require('./routes/dashboard');
+const customerRoute = require('./routes/products');
 const orderRoute = require('./routes/order');
-const categoriesRoute = require('./routes/categories');
-const authRoute = require('./routes/userAuth');
-const sellerAuthRoute = require('./routes/sellerAuth');
 
-app.use('/api/products', productsRoute)
+
+//remove users route
 app.use('/api/cart', cartRoute)
+app.use('/api/dashboard', sellerRoute)
+app.use('/api/products', customerRoute)
 app.use('/api/orders', orderRoute)
-app.use('/api/categories', categoriesRoute)
-app.use('/api/users', userRoute)
-app.use('/api/userAuth', authRoute)
-app.use('/api/sellerAuth', sellerAuthRoute)
+
+
 
 // Connect to the database
 mongoose.connect(process.env.DB_URL)
