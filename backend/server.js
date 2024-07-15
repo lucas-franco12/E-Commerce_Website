@@ -18,8 +18,6 @@ app.use(express.static(path.join(__dirname, '../build')));
 //Routes
 const productsRoute = require('./routes/products');
 const cartRoute = require('./routes/cart');
-const sellerRoute = require('./routes/dashboard');
-const customerRoute = require('./routes/products');
 const orderRoute = require('./routes/order');
 const userAuthRoute = require('./routes/userAuth');
 
@@ -27,7 +25,8 @@ const userAuthRoute = require('./routes/userAuth');
 app.use('/api/products', productsRoute) // add-product -> need 
 app.use('/api/cart', cartRoute) // add userid
 app.use('/api/orders', orderRoute) 
-app.use('/api/signup', userAuthRoute); 
+app.use('/api/signup', userAuthRoute)
+app.use('/api/login', userAuthRoute)
 
 // Connect to the database
 mongoose.connect(process.env.DB_URL)

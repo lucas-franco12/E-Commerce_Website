@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema(
         password: { type: String, required: true},
         email: { type: String, required: true, unique: true},
         firebaseUserId: {type: String, required: true, unique: true},
-        userType: {type: String, enum: ['customer', 'seller'], required: true,}
+        userType: {type: String, enum: ['customer', 'seller'], required: true}
     },
     {timestamps: true}
 );
