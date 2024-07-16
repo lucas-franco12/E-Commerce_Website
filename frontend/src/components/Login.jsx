@@ -27,7 +27,7 @@ export default function Login({ setUserId }) {
             const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
             const firebaseUserId = userCredential.user.uid;
 
-            const response = await api.post(`/login/${userType}`, { email: formData.email, password: formData.password, firebaseUserId });
+            const response = await api.post(`/login/${userType}`, { username: formData.username, email: formData.email, password: formData.password, firebaseUserId });
             const userId = response.data.userId;
             setUserId(userId);
 
