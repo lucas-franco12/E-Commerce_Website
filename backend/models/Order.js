@@ -6,7 +6,7 @@ const OrderSchema = new mongoose.Schema(
     {
         userId: { type: String, required: true},
         products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
-        amount: { type: Number, required: true},
+        amount: { type: Number, required: true, min: 0, get: v => Math.round(v * 100) / 100, set: v => Math.round(v * 100) / 100},
         address: { type: Object, required: true},
         date: { type: Date, default: Date.now }
     },
