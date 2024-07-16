@@ -30,7 +30,7 @@ export default function ProductDetail() {
     }
 
     const handleAddToCart = () => {
-        addToCart(product);
+        addToCart(product, userId);
         navigate(`/cart?userId=${userId}`);
     };
 

@@ -9,8 +9,8 @@ export default function OrderPage() {
   const queryParams = new URLSearchParams(location.search);
   const userId = queryParams.get('userId');
 
-  const viewProduct = (productId) => {
-    navigate(`/product/${productId}?userId=${userId}`);
+  const viewOrderDetails = (orderId) => {
+    navigate(`/order/${orderId}?userId=${userId}`);
   }
 
   useEffect(() => {
@@ -37,18 +37,16 @@ export default function OrderPage() {
               <tr>
                 <th>Order ID</th>
                 <th>Date</th>
-                <th>Product Name</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               {orders.map((order) => (
-                <tr key={order.id}>
-                  <td>{order.id}</td>
-                  <td>{order.date}</td>
-                  <td>{order.productName}</td>
+                <tr key={order._id}>
+                  <td>{order._id}</td>
+                  <td>{new Date(order.createdAt).toLocaleDateString()}</td>
                   <td>
-                    <button className="btn form--btn2" onClick={viewProduct}>View</button>
+                    <button className="btn form--btn2" onClick={() => viewOrderDetails(order._id)}>View</button>
                   </td>
                 </tr>
               ))}

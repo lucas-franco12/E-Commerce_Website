@@ -12,7 +12,6 @@ export default function Cart() {
 
   useEffect(() => {
     const fetchCart = async () => {
-      if (!userId) return; 
       try {
         const response = await api.get(`/cart?userId=${userId}`);
         setCart(response.data);
@@ -44,33 +43,35 @@ export default function Cart() {
     }
   };
 
-  return (
-    <div className="cart">
-      <h1>Your Cart</h1>
-      {cart.length === 0 ? (
-        <p>Your cart is empty</p>
-      ) : (
-        <div>
-          <div className="cart--container">
-            <div className="cart--items">
-              {cart.map((product) => (
-                <div key={product._id} className="cart--item">
-                  <img src={product.img} alt={product.name} />
-                  <h2>{product.name}</h2>
-                  <p>{`$${product.price}`}</p>
-                  <button onClick={() => handleRemoveFromCart(product._id)}>Remove</button>
-                </div>
-              ))}
-            </div>
-          </div>
+    return (
+        <div className="cart">
+        <h1>Your Cart</h1>
+        {cart.length === 0 ? (
+            <p>Your cart is empty</p>
+        ) : (
+                <div>
+                    <div className="cart--container">
+                        <div className="cart--items">
+                            {cart.map((product) => (
+                                <div key={product.id} className="cart--item">
+                                    <img src={product.src} alt={product.name} />
+                                    <h2>{product.name}</h2>
+                                    <p>{`$${product.price}`}</p>
+                                    <button onClick={() => handleRemoveFromCart(product.id)}>Remove</button>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
 
-          <div className="cart--options">
-            <Link to={`/products?userId=${userId}`} className="form--btn">Continue Shopping</Link>
-            <button onClick={handleClearCart} className="form--btn">Clear Cart</button>
-            <Link to={`/checkout?userId=${userId}`} className="form--btn">Proceed to Checkout</Link>
-          </div>
+                    <div className="cart--options">
+                      <Link to={`/products?userId=${userId}`} className="form--btn">Continue Shopping</Link>
+                      <button onClick={handleClearCart} className="form--btn">Clear Cart</button>
+                      <Link to={`/checkout?userId=${userId}`} className="form--btn">Proceed to Checkout</Link>
+                    </div>
+                </div>
+        )}
         </div>
-      )}
-    </div>
-  );
+    );
 }
+
+

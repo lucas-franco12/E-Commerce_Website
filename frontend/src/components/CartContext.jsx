@@ -33,7 +33,7 @@ export function CartProvider({ children, userId }) {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = async (product) => {
+  const addToCart = async (product, userId) => {
     console.log("Adding to cart, product:", product);
     try {
       const response = await api.post('/cart', {
