@@ -15,9 +15,11 @@ export function CartProvider({ children, userId }) {
 
   useEffect(() => {
     const fetchCart = async () => {
-      if (!userId) return; // Ensure userId is available
+      if (!userId) return; 
       try {
+        console.log("Fetching cart for userId:", userId);
         const response = await api.get(`/cart?userId=${userId}`);
+        console.log("Fetched cart data:", response.data);
         setCart(response.data);
       } catch (err) {
         console.error('Error fetching cart', err);
@@ -32,11 +34,13 @@ export function CartProvider({ children, userId }) {
   }, [cart]);
 
   const addToCart = async (product) => {
+    console.log("Adding to cart, product:", product);
     try {
       const response = await api.post('/cart', {
         userId,
         productId: product._id
       });
+      console.log("Added to cart, response data:", response.data);
       setCart(response.data);
     } catch (err) {
       console.error('Error adding to cart', err);

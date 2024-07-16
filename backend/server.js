@@ -22,8 +22,8 @@ const orderRoute = require('./routes/order');
 const userAuthRoute = require('./routes/userAuth');
 
 
-app.use('/api/products', productsRoute) // add-product -> need 
-app.use('/api/cart', cartRoute) // add userid
+app.use('/api/products', productsRoute) 
+app.use('/api/cart', cartRoute) 
 app.use('/api/orders', orderRoute) 
 app.use('/api', userAuthRoute)
 

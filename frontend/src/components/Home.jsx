@@ -10,7 +10,7 @@ export default function Home(){
                 easy to use web application </p>
             <ul>
                 <li><Link className="btn home--btn" to={`/login/customer`} >Browse Products</Link></li>
-                <li><Link className="btn home--btn" to={`/signup/seller`} >Sell Products</Link></li>
+                <li><Link className="btn home--btn" to={`/login/seller`} >Sell Products</Link></li>
             </ul>
         </div>
     );
