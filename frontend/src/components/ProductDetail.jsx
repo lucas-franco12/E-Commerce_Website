@@ -30,7 +30,11 @@ export default function ProductDetail() {
     }
 
     const handleAddToCart = () => {
-        addToCart(product, userId);
+        if (!userId) {
+            console.error('User ID is missing');
+            return;
+        }
+        addToCart({ ...product, userId });
         navigate(`/cart?userId=${userId}`);
     };
 
