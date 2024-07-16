@@ -36,6 +36,7 @@ export default function Checkout() {
         items: cart,
         userId: userId
       };
+      console.error('Placing order', order);
       await api.post('/orders', order);
       clearCart();
       setOrderPlaced(true);

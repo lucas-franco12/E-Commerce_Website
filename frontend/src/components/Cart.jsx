@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { useCart } from './CartContext';
 import { Link, useLocation } from 'react-router-dom';
@@ -12,11 +13,9 @@ export default function Cart() {
 
   useEffect(() => {
     const fetchCart = async () => {
-      if (!userId) return; 
       try {
         const response = await api.get(`/cart?userId=${userId}`);
         setCart(response.data);
-
       } catch (err) {
         console.error('Error fetching cart', err);
       }
@@ -56,10 +55,10 @@ export default function Cart() {
             <div className="cart--items">
               {cart.map((product) => (
                 <div key={product._id} className="cart--item">
-                  <img src={product.img} alt={product.name} />
-                  <h2>{product.name}</h2>
-                  <p>{`$${product.price}`}</p>
-                  <button onClick={() => handleRemoveFromCart(product._id)}>Remove</button>
+                  <img src={product.product.src} alt={product.product.name} />
+                  <h2>{product.product.name}</h2>
+                  <p>{`$${product.product.price}`}</p>
+                  <button onClick={() => handleRemoveFromCart(product.product._id)}>Remove</button>
                 </div>
               ))}
             </div>
