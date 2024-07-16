@@ -38,7 +38,7 @@ export default function Login({ setUserId }) {
             }
         } catch (err) {
             console.error('Login error', err);
-            alert('An error occurred. Please try again.');
+            alert('Incorrect username or password. Please try again.');
         }
     };
 

@@ -15,6 +15,7 @@ export default function Cart() {
       try {
         const response = await api.get(`/cart?userId=${userId}`);
         setCart(response.data);
+
       } catch (err) {
         console.error('Error fetching cart', err);
       }
