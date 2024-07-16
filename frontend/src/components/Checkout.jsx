@@ -28,13 +28,18 @@ export default function Checkout() {
     });
   };
 
+  const calculateTotalAmount = () => {
+    return cart.reduce((total, item) => total + item.product.price, 0);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const order = {
-        ...formData,
-        items: cart,
-        userId: userId
+        userId,
+        products: cart.map(item => item.product._id),
+        amount: calculateTotalAmount(),
+        address: { detail: formData.address },
       };
       console.error('Placing order', order);
       await api.post('/orders', order);
