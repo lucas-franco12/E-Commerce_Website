@@ -25,8 +25,7 @@ const userAuthRoute = require('./routes/userAuth');
 app.use('/api/products', productsRoute) // add-product -> need 
 app.use('/api/cart', cartRoute) // add userid
 app.use('/api/orders', orderRoute) 
-app.use('/api/signup', userAuthRoute)
-app.use('/api/login', userAuthRoute)
+app.use('/api', userAuthRoute)
 
 // Connect to the database
 mongoose.connect(process.env.DB_URL)
