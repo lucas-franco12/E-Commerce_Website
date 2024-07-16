@@ -10,6 +10,7 @@ import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import SellerDashboard from './components/SellerDashboard';
 import OrderPage from './components/OrderPage';
+import OrderDetailPage from './components/OrderDetailPage';
 import AddProduct from './components/AddProduct';
 import { CartProvider } from './components/CartContext';
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/dashboard" element={<SellerDashboard />} />
           <Route path="/orders" element={<OrderPage />} />
+          <Route path="/order/:orderId" element={<OrderDetailPage />} />
         </Routes>
       </div>
     </CartProvider>

@@ -64,13 +64,15 @@ export default function Cart() {
             </div>
           </div>
 
-          <div className="cart--options">
-            <Link to={`/products?userId=${userId}`} className="form--btn">Continue Shopping</Link>
-            <button onClick={handleClearCart} className="form--btn">Clear Cart</button>
-            <Link to={`/checkout?userId=${userId}`} className="form--btn">Proceed to Checkout</Link>
-          </div>
+                    <div className="cart--options">
+                      <Link to={`/products?userId=${userId}`} className="form--btn">Continue Shopping</Link>
+                      <button onClick={handleClearCart} className="form--btn">Clear Cart</button>
+                      <Link to={`/checkout?userId=${userId}`} className="form--btn">Proceed to Checkout</Link>
+                    </div>
+                </div>
+        )}
         </div>
-      )}
-    </div>
-  );
+    );
 }
+
+

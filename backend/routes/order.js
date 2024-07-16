@@ -1,7 +1,43 @@
 const router = require('express').Router();
 const Order = require('../models/Order');
 
-//CHECK IF UPDATE, DELETE, AND GET USERS ORDERS WORK
+// Get user orders
+router.get('/', async (req, res) => {
+    const userId = req.query.userId;
+    try {
+        const orders = await Order.find({ userId })
+            .populate('products')
+            .sort({ createdAt: -1 });
+        res.status(200).json(orders);
+    } catch (err) {
+        console.error('Error fetching orders', err);
+        res.status(500).json(err);
+    }
+});
+
+// Get single order by ID
+router.get('/:orderId', async (req, res) => {
+    const orderId = req.params.orderId;
+    const userId = req.query.userId;
+    try {
+        const order = await Order.findById(orderId)
+            .populate('products');
+
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+
+        // Check if the order belongs to the userd
+        if (order.userId !== userId) {
+            return res.status(403).json({ message: 'Unauthorized access to order' });
+        }
+
+        res.status(200).json(order);
+    } catch (err) {
+        console.error('Error fetching order', err);
+        res.status(500).json(err);
+    }
+});
 
 //Create order
 router.post('/', async (req, res) => {
@@ -30,17 +66,6 @@ router.delete('/:id', async (req, res) => {
         await Order.findByIdAndDelete(req.params.id);
         res.status(200).json("Order has been deleted...");
     } catch(err){
-        res.status(500).json(err);
-    }
-});
-
-// Get user orders
-router.get('/', async (req, res) => {
-    const userId = req.query.userId;
-    try {
-        const orders = await Order.find({ userId });
-        res.status(200).json(orders);
-    } catch (err) {
         res.status(500).json(err);
     }
 });
