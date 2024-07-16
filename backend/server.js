@@ -16,33 +16,17 @@ app.use(morgan('tiny'));
 app.use(express.static(path.join(__dirname, '../build')));
 
 //Routes
-<<<<<<< Updated upstream
-=======
 const productsRoute = require('./routes/products');
->>>>>>> Stashed changes
 const cartRoute = require('./routes/cart');
-const sellerRoute = require('./routes/dashboard');
-const customerRoute = require('./routes/products');
 const orderRoute = require('./routes/order');
-<<<<<<< Updated upstream
-
-
-//remove users route
-app.use('/api/cart', cartRoute)
-app.use('/api/dashboard', sellerRoute)
-app.use('/api/products', customerRoute)
-app.use('/api/orders', orderRoute)
-
-
-=======
 const userAuthRoute = require('./routes/userAuth');
 
 
 app.use('/api/products', productsRoute) // add-product -> need 
 app.use('/api/cart', cartRoute) // add userid
 app.use('/api/orders', orderRoute) 
-app.use('/api/signup', userAuthRoute); 
->>>>>>> Stashed changes
+app.use('/api/signup', userAuthRoute)
+app.use('/api/login', userAuthRoute)
 
 // Connect to the database
 mongoose.connect(process.env.DB_URL)
