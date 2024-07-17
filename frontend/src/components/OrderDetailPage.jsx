@@ -38,7 +38,7 @@ export default function OrderDetailPage() {
         ))}
       </ul>
       <p><strong>Total Amount:</strong> ${order.amount}</p>
-      <p><strong>Delivery Address:</strong> {order.address}</p>
+      <p><strong>Delivery Address:</strong> {order.address.detail}</p>
     </div>
   );
 }

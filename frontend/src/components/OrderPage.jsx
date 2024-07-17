@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import api from '../api';
 
 export default function OrderPage() {
@@ -10,7 +10,7 @@ export default function OrderPage() {
   const userId = queryParams.get('userId');
 
   const viewOrderDetails = (orderId) => {
-    navigate(`/order/${orderId}?userId=${userId}`);
+    navigate(`/orders/${orderId}?userId=${userId}`);
   }
 
   useEffect(() => {
@@ -53,6 +53,7 @@ export default function OrderPage() {
             </tbody>
           </table> 
         )}
+        <Link to={`/products?userId=${userId}`} className="form--btn">Continue Shopping</Link>
       </div>
   );
 }

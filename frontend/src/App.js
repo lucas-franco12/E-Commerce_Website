@@ -31,7 +31,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/dashboard" element={<SellerDashboard />} />
           <Route path="/orders" element={<OrderPage />} />
-          <Route path="/order/:orderId" element={<OrderDetailPage />} />
+          <Route path="/orders/:orderId" element={<OrderDetailPage />} />
         </Routes>
       </div>
     </CartProvider>
