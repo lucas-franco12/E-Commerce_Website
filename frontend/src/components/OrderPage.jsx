@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import api from '../api';
+import Navbar from './Navbar';
 
 export default function OrderPage() {
   const [orders, setOrders] = useState([]);
@@ -27,10 +28,15 @@ export default function OrderPage() {
   }, [userId]);
 
   return (
+    <>
+    <Navbar userType='customer' userId={userId}/>
       <div className="orders">
         <h1>Your Orders</h1>
         {orders.length === 0 ? (
-            <p className="empty--message">You have no orders</p>
+          <div className="empty--items">
+            <p className="empty--message">No orders yet!</p>
+            <Link to={`/products?userId=${userId}`} className="form--btn">Continue Shopping</Link>
+          </div>
         ) : (
           <table className="table">
             <thead>
@@ -53,7 +59,8 @@ export default function OrderPage() {
             </tbody>
           </table> 
         )}
-        <Link to={`/products?userId=${userId}`} className="form--btn">Continue Shopping</Link>
       </div>
+    </>
   );
+  
 }
