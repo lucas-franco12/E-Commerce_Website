@@ -20,12 +20,14 @@ const productsRoute = require('./routes/products');
 const cartRoute = require('./routes/cart');
 const orderRoute = require('./routes/order');
 const userAuthRoute = require('./routes/userAuth');
+const usersRoute = require('./routes/users');
 
 
 app.use('/api/products', productsRoute) 
 app.use('/api/cart', cartRoute) 
 app.use('/api/orders', orderRoute) 
 app.use('/api', userAuthRoute)
+app.use('/api/users', usersRoute);
 
 // Connect to the database
 mongoose.connect(process.env.DB_URL)
