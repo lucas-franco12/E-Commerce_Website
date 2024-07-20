@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {verifyTokenAndAuthorization, verifyTokenAndAdmin} = require('./verifyToken');
+const CryptoJS = require('crypto-js');
 const User = require('../models/User');
 
 //Update
@@ -19,10 +19,23 @@ router.put('/:id', async (req, res) => {
 
 //Delete
 router.delete('/:id', async (req, res) => {
-    try{
+    try {
+        // Find the user to ensure they exist
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).json("User not found");
+        }
+
+        // If the user is a seller, delete their products
+        if (user.userType === 'seller') {
+            await Product.deleteMany({ createdBy: user._id });
+        }
+
+        // Delete the user
         await User.findByIdAndDelete(req.params.id);
-        res.status(200).json("User has been deleted...");
-    } catch(err){
+
+        res.status(200).json("User and their products (if seller) have been deleted...");
+    } catch (err) {
         res.status(500).json(err);
     }
 });
