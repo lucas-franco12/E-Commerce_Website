@@ -27,7 +27,7 @@ export default function SellerDashboard() {
   }, [userId]);
 
   const productList = products && products.map((product, index) => (
-    <ProductCard key={index} product={product} />
+    <ProductCard key={index} product={product} userId={userId} userType='seller'/>
   ));
 
   return (

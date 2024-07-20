@@ -12,6 +12,8 @@ import SellerDashboard from './components/SellerDashboard';
 import OrderPage from './components/OrderPage';
 import OrderDetailPage from './components/OrderDetailPage';
 import AddProduct from './components/AddProduct';
+import EditProduct from './components/EditProduct';
+import ManageAccount from './components/ManageAccount';
 import { CartProvider } from './components/CartContext';
 
 function App() {
@@ -32,6 +34,8 @@ function App() {
           <Route path="/dashboard" element={<SellerDashboard />} />
           <Route path="/orders" element={<OrderPage />} />
           <Route path="/orders/:orderId" element={<OrderDetailPage />} />
+          <Route path="/edit-product/:id" element={<EditProduct />} />
+          <Route path="/account/:userId" element={<ManageAccount />} />
         </Routes>
       </div>
     </CartProvider>
