@@ -26,7 +26,7 @@ export default function ProductCatalog() {
 
   
   const productList = products && products.map((product, index) => (
-    <ProductCard key={index} product={product} userId={userId}/>
+    <ProductCard key={index} product={product} userId={userId} userType='customer'/>
   ));
   
 
@@ -45,6 +45,6 @@ export default function ProductCatalog() {
     </section>
     </>
   );
-}
+} 
 
 

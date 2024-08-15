@@ -9,9 +9,10 @@ export default function OrderPage() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const userId = queryParams.get('userId');
+  const userType = queryParams.get('userType');
 
   const viewOrderDetails = (orderId) => {
-    navigate(`/orders/${orderId}?userId=${userId}`);
+    navigate(`/orders/${orderId}?userId=${userId}&userType=${userType}`);
   }
 
   useEffect(() => {
@@ -29,13 +30,17 @@ export default function OrderPage() {
 
   return (
     <>
-    <Navbar userType='customer' userId={userId}/>
+    <Navbar userType={userType} userId={userId}/>
       <div className="orders">
         <h1>Your Orders</h1>
         {orders.length === 0 ? (
           <div className="empty--items">
             <p className="empty--message">No orders yet!</p>
-            <Link to={`/products?userId=${userId}`} className="form--btn">Continue Shopping</Link>
+            {userType === 'customer' ? (
+              <Link to={`/products?userId=${userId}`} className="form--btn">Continue Shopping</Link>
+            ):( 
+              <Link to={`/dashboard?userId=${userId}`} className="form--btn">Back to Dashboard</Link>
+            )}
           </div>
         ) : (
           <table className="table">

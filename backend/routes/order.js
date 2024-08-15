@@ -70,6 +70,20 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+// Get orders for a specific seller
+router.get('/seller/:sellerId', async (req, res) => {
+    const sellerId = req.params.sellerId;
+    try {
+        const orders = await Order.find({ "products.sellerId": sellerId })
+            .populate('products.product') // Populating the product details
+            .sort({ createdAt: -1 });
+        res.status(200).json(orders);
+    } catch (err) {
+        console.error('Error fetching orders for seller', err);
+        res.status(500).json(err);
+    }
+});
+
 // //Get All carts (admin function)
 // router.get('/', async (req, res) => {
 //     try{

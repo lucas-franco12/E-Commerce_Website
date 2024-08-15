@@ -5,7 +5,12 @@ const mongoose = require('mongoose');
 const OrderSchema = new mongoose.Schema(
     {
         userId: { type: String, required: true},
-        products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
+        products: [
+            {
+                product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
+                sellerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' } 
+            }
+        ],
         amount: { type: Number, required: true, min: 0, get: v => Math.round(v * 100) / 100, set: v => Math.round(v * 100) / 100},
         address: { type: Object, required: true},
         date: { type: Date, default: Date.now }

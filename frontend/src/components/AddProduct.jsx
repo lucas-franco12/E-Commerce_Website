@@ -38,7 +38,7 @@ export default function AddProduct() {
       {submitted ? (
         <div className="submitted--product">
           <h1>Product has been added!</h1>
-          <i className="bi bi-check-circle"></i>
+          <i className="bi bi-check-circle submitted--icon"></i>
           <Link className="btn form--btn" to={`/dashboard?userId=${userId}`}>Return to Dashboard</Link>
         </div>
       ) : (

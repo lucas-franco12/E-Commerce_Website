@@ -194,7 +194,6 @@ export default function ManageAccount() {
                     {submitted ? (
                         <div className="submitted--account">
                             <h1>Account has been updated!</h1>
-                            <i className="bi bi-check-circle"></i>
                             <Link className="btn form--btn" to={`/`}>Return to Home</Link>
                         </div>
                     ) : (
