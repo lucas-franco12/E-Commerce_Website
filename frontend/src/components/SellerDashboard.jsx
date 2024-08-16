@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import Navbar from './Navbar';
+import SearchBar from './SearchBar';
 import api from '../api';
 
 export default function SellerDashboard() {
   const [products, setProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const location = useLocation();
 
   const searchParams = new URLSearchParams(location.search);
@@ -26,7 +28,11 @@ export default function SellerDashboard() {
     fetchProducts();
   }, [userId]);
 
-  const productList = products && products.map((product, index) => (
+  const filteredProducts = products.filter(product =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const productList = filteredProducts.map((product, index) => (
     <ProductCard key={index} product={product} userId={userId} userType='seller'/>
   ));
 
@@ -37,6 +43,7 @@ export default function SellerDashboard() {
       <div className="center--text">
         <h2>Welcome to your Dashboard</h2>
       </div>
+      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} /> {/* Add SearchBar */}
       { products.length > 0 ? 
         (<div className="dashboard--content">
             {productList}

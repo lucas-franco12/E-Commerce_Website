@@ -7,7 +7,7 @@ export default function SearchBar({ searchTerm, setSearchTerm }) {
       placeholder="Search products..."
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
-      className="search-bar"
+      className="search--bar"
     />
   );
 }
