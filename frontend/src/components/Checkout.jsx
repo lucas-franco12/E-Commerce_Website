@@ -37,7 +37,10 @@ export default function Checkout() {
     try {
       const order = {
         userId,
-        products: cart.map(item => item.product._id),
+        products: cart.map(item => ({
+          product: item.product._id,
+          sellerId: item.product.createdBy
+        })),
         amount: calculateTotalAmount(),
         address: { detail: formData.address },
       };
@@ -61,7 +64,7 @@ export default function Checkout() {
           <h1>Order has been placed!</h1>
           <i className="bi bi-check-circle"></i>
           <Link className="btn form--btn" to={`/products?userId=${userId}`}>Return to Products</Link>
-          <Link className="btn form--btn2" to={`/orders?userId=${userId}`}>View your Orders</Link>
+          <Link className="btn form--btn2" to={`/orders?userId=${userId}&userType=customer`}>View your Orders</Link>
         </div>
       ) : (
         <div className="form-container">

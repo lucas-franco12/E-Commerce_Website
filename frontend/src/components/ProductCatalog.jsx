@@ -15,7 +15,7 @@ export default function ProductCatalog() {
   useEffect(() => {
     async function fetchProducts(){
       try {
-        const response = await api.get('/products');// get all products
+        const response = await api.get('/products');
         setProducts(response.data);
       } catch(err) {
         console.error('Could not fetch products', err);
@@ -26,13 +26,13 @@ export default function ProductCatalog() {
 
   
   const productList = products && products.map((product, index) => (
-    <ProductCard key={index} product={product} userId={userId} userType='customer'/>
+    <ProductCard key={index} product={product} userId={userId} userType={'customer'}/>
   ));
   
 
   return (
     <>
-    <Navbar userType='customer' userId={userId}/>
+    <Navbar userType={'customer'} userId={userId}/>
     <section className="product--catalog">
         <div className="center--text">
           <h2>Product Catalog</h2>

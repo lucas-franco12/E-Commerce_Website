@@ -33,4 +33,4 @@ export default function ProductCard({ product, userId, userType }) {
             }
         </div>
     );
-}
+} 

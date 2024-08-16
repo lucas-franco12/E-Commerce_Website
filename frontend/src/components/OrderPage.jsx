@@ -10,6 +10,7 @@ export default function OrderPage() {
   const queryParams = new URLSearchParams(location.search);
   const userId = queryParams.get('userId');
   const userType = queryParams.get('userType');
+  console.log(userType)
 
   const viewOrderDetails = (orderId) => {
     navigate(`/orders/${orderId}?userId=${userId}&userType=${userType}`);
@@ -18,15 +19,20 @@ export default function OrderPage() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await api.get(`/orders?userId=${userId}`);
+        let response;
+        if (userType === 'customer') {
+          response = await api.get(`/orders?userId=${userId}&userType=customer`);
+        } else if (userType === 'seller') {
+          response = await api.get(`/orders/seller/${userId}`);
+        }
         setOrders(response.data);
       } catch (err) {
         console.error('Error fetching orders', err);
       }
     }
-
+  
     fetchOrders();
-  }, [userId]);
+  }, [userId, userType]);
 
   return (
     <>
