@@ -116,7 +116,7 @@ export function CartProvider({ children }) {
     fetchCart();
   }, [userId]);
 
-  useEffect(() => {
+  useEffect(() => { 
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 

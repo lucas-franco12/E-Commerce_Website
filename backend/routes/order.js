@@ -2,19 +2,6 @@ const router = require('express').Router();
 const Order = require('../models/Order');
 
 // Get user orders
-// router.get('/', async (req, res) => {
-//     const userId = req.query.userId;
-//     try {
-//         const orders = await Order.find({ userId })
-//             .populate('products')
-//             .sort({ createdAt: -1 });
-//         res.status(200).json(orders);
-//     } catch (err) {
-//         console.error('Error fetching orders', err);
-//         res.status(500).json(err);
-//     }
-// });
-
 router.get('/', async (req, res) => {
     const { userId, userType } = req.query;
 
@@ -42,29 +29,6 @@ router.get('/', async (req, res) => {
 });
 
 // Get single order by ID
-// router.get('/:orderId', async (req, res) => {
-//     const orderId = req.params.orderId;
-//     const userId = req.query.userId;
-//     try {
-//         const order = await Order.findById(orderId)
-//             .populate('products');
-
-//         if (!order) {
-//             return res.status(404).json({ message: 'Order not found' });
-//         }
-
-//         // Check if the order belongs to the userd
-//         if (order.userId !== userId) {
-//             return res.status(403).json({ message: 'Unauthorized access to order' });
-//         }
-
-//         res.status(200).json(order);
-//     } catch (err) {
-//         console.error('Error fetching order', err);
-//         res.status(500).json(err);
-//     }
-// });
-
 router.get('/:orderId', async (req, res) => {
     const { orderId } = req.params;
     const { userId, userType } = req.query;
@@ -99,15 +63,6 @@ router.get('/:orderId', async (req, res) => {
 });
 
 //Create order
-// router.post('/', async (req, res) => {
-//     const newOrder = new Order(req.body);
-//     try{
-//         const savedOrder = await newOrder.save();
-//         res.status(201).json(savedOrder);
-//     } catch(err){
-//         res.status(500).json(err);
-//     }
-// });
 
 router.post('/', async (req, res) => {
     console.log("Incoming order data:", req.body);
@@ -124,15 +79,6 @@ router.post('/', async (req, res) => {
 });
 
 // Update order
-// router.post('/:id', async (req, res) => {
-//     try{
-//         const updatedOrder = await Order.findByIdAndUpdate(req.params.id, { $set: req.body }, {new: true});
-//         res.status(200).json(updatedOrder);
-//     } catch(err){
-//         res.status(500).json(err);
-//     }
-// });
-
 router.post('/:id', async (req, res) => {
     try {
         const updatedOrder = await Order.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
@@ -154,20 +100,6 @@ router.delete('/:id', async (req, res) => {
         res.status(500).json({ message: 'Error deleting order', error: err });
     }
 });
-
-// Get orders for a specific seller
-// router.get('/seller/:sellerId', async (req, res) => {
-//     const sellerId = req.params.sellerId;
-//     try {
-//         const orders = await Order.find({ "products.sellerId": sellerId })
-//             .populate('products.product') // Populating the product details
-//             .sort({ createdAt: -1 });
-//         res.status(200).json(orders);
-//     } catch (err) {
-//         console.error('Error fetching orders for seller', err);
-//         res.status(500).json(err);
-//     }
-// });
 
 router.get('/seller/:sellerId', async (req, res) => {
     const { sellerId } = req.params;

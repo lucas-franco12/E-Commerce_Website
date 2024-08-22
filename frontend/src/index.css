@@ -494,7 +494,7 @@ nav i {
 }
 
 /* Checkout */
-.checkout--container{
+/* .checkout--container{
   width: 600px;
   height: 600px;
   text-align: center;
@@ -618,6 +618,116 @@ nav i {
   text-align: center;
   padding: 10px 0;
 }
+
+/* Stripe */
+
+/* Checkout */
+.checkout--container{
+  width: 600px;
+  height: auto; /* Adjust height to be dynamic based on content */
+  text-align: center;
+  background-color: var(--secondary-bg-color); 
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.form-container {
+  text-align: center;
+  margin: 30px auto;
+  width: 80%;
+}
+
+.checkout-input-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.input-field {
+  background: transparent;
+  border: none;
+  margin: 10px 0; /* Reduced margin */
+  border-radius: 3px;
+  box-shadow: 0 0 5px var(--text-color);
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.checkout-input {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  padding: 15px 15px; /* Reduced padding */
+}
+
+.input-field i {
+  margin-left: 15px;
+  color: #272829;
+}
+
+.checkout-input::placeholder {
+  color: #272829;
+  opacity: 1;
+}
+
+/* Stripe */
+.StripeElement {
+  background: transparent;
+  border: 1px solid #eaeaea;
+  border-radius: 3px;
+  padding: 15px;
+  font-size: 16px;
+  color: var(--text-color);
+  transition: box-shadow 0.3s ease;
+  box-shadow: 0 0 5px var(--text-color);
+  width: 100%;
+}
+
+.StripeElement--focus {
+  box-shadow: 0 0 20px var(--accent-color1);
+}
+
+.StripeElement--webkit-autofill {
+  background-color: var(--secondary-bg-color) !important;
+}
+
+.StripeElement--invalid {
+  border-color: red;
+  box-shadow: 0 0 5px red;
+}
+
+.StripeElement--complete {
+  border-color: var(--accent-color1);
+}
+
+.form--btn{
+  display: inline-block;
+  padding: 10px 25px;
+  background: var(--accent-color1);
+  color: var(--secondary-bg-color);
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all .50s ease;
+  max-width: 200px;
+}
+
+.form--btn:hover{
+  background: transparent;
+  color: var(--accent-color1);
+  box-shadow: 0 0 20px var(--text-color);
+  border: 2px solid var(--accent-color1);
+  transform: scale(1.1);
+}
+
+
 
 /* Order Page */
 

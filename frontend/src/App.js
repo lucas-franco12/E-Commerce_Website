@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Route, Routes} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './index.css';
 import Home from './components/Home';
 import Login from './components/Login';
@@ -15,6 +15,10 @@ import AddProduct from './components/AddProduct';
 import EditProduct from './components/EditProduct';
 import ManageAccount from './components/ManageAccount';
 import { CartProvider } from './components/CartContext';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+
+const stripePromise = loadStripe("pk_test_51PoUtiH8wl4X9pVrwN790BZa0ZRtAiSSVMmU5tHPqbCFGc2OBnADFK2L3F33RwyHkRzQchvQ2P0EGcfzDl0erwD800HL0gBHMr");
 
 function App() {
   const [userId, setUserId] = useState(null);
@@ -30,7 +34,14 @@ function App() {
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/add-product" element={<AddProduct />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route 
+            path="/checkout" 
+            element={
+              <Elements stripe={stripePromise}>
+                <Checkout />
+              </Elements>
+            } 
+          />
           <Route path="/dashboard" element={<SellerDashboard />} />
           <Route path="/orders" element={<OrderPage />} />
           <Route path="/orders/:orderId" element={<OrderDetailPage />} />
@@ -43,3 +54,4 @@ function App() {
 }
 
 export default App;
+

@@ -49,7 +49,7 @@ export default function Cart() {
     } catch (err) {
       console.error('Error clearing cart', err);
     }
-  };
+  }; 
 
   const calculateTotal = (cartItems) => {
     const totalAmount = cartItems.reduce((total, item) => total + item.product.price, 0);
