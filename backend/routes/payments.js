@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const stripe = require("stripe")("sk_test_51PoUtiH8wl4X9pVrOd7Z1NMDyYs6uf4LeC0f7KrHjElPCdbytktosCF9TMZ0eFdpwcJJCwe0WPrdQt6goPEm76gT00pb1xlT0k");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 router.post('/create-payment-intent', async (req, res) => {
     const { amount } = req.body;

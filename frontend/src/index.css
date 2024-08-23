@@ -610,18 +610,21 @@ nav i {
 }
 
 
+
+
+/* Stripe */
+
+/* Checkout */
 .banner {
   position: fixed;
   top: 0;
+  max-height: 50px;
   background-color: var(--accent-color1);
   color: #fff;
   text-align: center;
   padding: 10px 0;
 }
 
-/* Stripe */
-
-/* Checkout */
 .checkout--container{
   width: 600px;
   height: auto; /* Adjust height to be dynamic based on content */
@@ -681,11 +684,10 @@ nav i {
   background: transparent;
   border: 1px solid #eaeaea;
   border-radius: 3px;
-  padding: 15px;
+  padding: 18px 15px;
   font-size: 16px;
   color: var(--text-color);
   transition: box-shadow 0.3s ease;
-  box-shadow: 0 0 5px var(--text-color);
   width: 100%;
 }
 

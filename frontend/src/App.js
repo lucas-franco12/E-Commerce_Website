@@ -18,7 +18,7 @@ import { CartProvider } from './components/CartContext';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 
-const stripePromise = loadStripe("pk_test_51PoUtiH8wl4X9pVrwN790BZa0ZRtAiSSVMmU5tHPqbCFGc2OBnADFK2L3F33RwyHkRzQchvQ2P0EGcfzDl0erwD800HL0gBHMr");
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 function App() {
   const [userId, setUserId] = useState(null);

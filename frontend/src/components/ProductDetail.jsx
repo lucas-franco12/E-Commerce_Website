@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useCart } from './CartContext';
+import Navbar from './Navbar';
 import api from '../api';
 
 export default function ProductDetail() {
@@ -29,16 +30,22 @@ export default function ProductDetail() {
         return <div>Product not found!</div>;
     }
 
-    const handleAddToCart = () => {
+    const handleAddToCart = async () => {
         if (!userId) {
             console.error('User ID is missing');
             return;
         }
-        addToCart({ ...product, userId });
-        navigate(`/cart?userId=${userId}`);
+        try {
+            await addToCart({ ...product, userId }); 
+            navigate(`/cart?userId=${userId}`);
+        } catch (err) {
+            console.error('Error adding product to cart:', err);
+        }
     };
 
     return (
+        <>
+        <Navbar userType='customer' userId={userId}/>
         <div className='product-detail--container'>
             <div className="product-detail--image">
                 <img src={product.src} alt={product.name} />
@@ -50,6 +57,7 @@ export default function ProductDetail() {
                 <div className="form--btn" onClick={handleAddToCart}>Add to Cart</div>
             </div>
         </div>
+        </>
     );
 }
  

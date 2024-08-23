@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useCart } from './CartContext';
 import { Link, useLocation } from 'react-router-dom';
 import api from '../api';
-import Navbar from './Navbar';
 
 export default function Cart() {
   const { cart, setCart, removeFromCart, clearCart } = useCart();
@@ -28,6 +27,10 @@ export default function Cart() {
       fetchCart();
     }
   }, [userId, setCart]);
+
+  if (cart === null) {
+    return <div>Loading cart...</div>;
+  }
 
   const handleRemoveFromCart = async (productId) => {
     try {
@@ -58,7 +61,6 @@ export default function Cart() {
 
   return (
     <>
-      <Navbar userType='customer' userId={userId}/>
       <div className="cart">
           <h1>Your Cart</h1>
           {cart.length === 0 ? (
