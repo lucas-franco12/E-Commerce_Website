@@ -494,81 +494,6 @@ nav i {
 }
 
 /* Checkout */
-/* .checkout--container{
-  width: 600px;
-  height: 600px;
-  text-align: center;
-  background-color: var(--secondary-bg-color); 
-  padding: 20px;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.form-container {
-  text-align: center;
-  margin: 30px auto;
-  width: 80%;
-}
-
-.checkout-input-group {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.input-field {
-  background: transparent;
-  border: none;
-  margin: 15px 0;
-  border-radius: 3px;
-  box-shadow: 0 0 5px var(--text-color);
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.checkout-input {
-  width: 100%;
-  background: transparent;
-  border: 0;
-  outline: 0;
-  padding: 18px 15px;
-}
-
-.input-field i {
-  margin-left: 15px;
-  color: #272829;
-}
-
-.checkout-input::placeholder {
-  color: #272829;
-  opacity: 1;
-}
-
-.form--btn{
-  display: inline-block;
-  padding: 10px 25px;
-  background: var(--accent-color1);
-  color: var(--secondary-bg-color);
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all .50s ease;
-  max-width: 200px
-}
-
-.form--btn:hover{
-  background: transparent;
-  color: var(--accent-color1);
-  box-shadow: 0 0 20px var(--text-color);
-  border: 2px solid var(--accent-color1);
-  transform: scale(1.1);
-}
-
 .order--placed{
   display: flex;
   flex-direction: column;
@@ -586,35 +511,6 @@ nav i {
  margin: 5px;
 }
 
-.form--btn2{
-  display: inline-block;
-  padding: 10px 25px;
-  color: var(--accent-color1);
-  background: var(--secondary-bg-color);
-  border: 2px solid var(--accent-color1);
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all .50s ease;
-  max-width: 250px;
-  min-width: 200px;
-}
-
-.form--btn2:hover{
-  background: var(--accent-color1);
-  color: var(--secondary-bg-color);
-  box-shadow: 0 0 20px var(--text-color);
-  border: 2px solid var(--accent-color1);
-  transform: scale(1.1);
-}
-
-
-
-
-/* Stripe */
-
-/* Checkout */
 .banner {
   position: fixed;
   top: 0;
@@ -791,6 +687,15 @@ nav i {
   flex-direction: column;
   align-items: center;
 }
+
+.submitted--icon{
+  color: var(--accent-color1);
+  font-size: 200px;
+}
+
+.submitted--account .form--btn{
+ max-width: 250px;
+} 
 
 /* Search Bar */
 .search--bar {
